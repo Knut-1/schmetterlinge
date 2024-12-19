@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interaktive Antwort</title>
+  <style>
+  /* Allgemeine Stile für das gesamte Dokument */
+  body {
+      font-family: Arial, sans-serif; /* Schriftart für den gesamten Text */
+      text-align: center;            /* Zentriert den Text horizontal */
+      background-color: #00bcd4;     /* Setzt die Hintergrundfarbe auf ein helles Blau */
+      color: white;                  /* Setzt die Textfarbe auf Weiß */
+      margin: 0;                     /* Entfernt den Standard-Außenabstand des Body-Elements */
+      padding: 50px;                 /* Fügt innen um das Body-Element 50px Platz hinzu */
+  }
+
+  /* Stile für die Hauptüberschrift (h1) */
+  h1 {
+      font-size: 8.5em;              /* Schriftgröße auf das 2,5-fache der Standardgröße setzen */
+      margin-bottom: 150px;           /* Abstand unterhalb der Überschrift von 50px */
+      margin-top: 150px; /* Abstand vom oberen Rand */
+
+  }
+
+  @keyframes pulsieren {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+      transform: scale(1.05); /* Button leicht vergrößern */
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Schatten verstärken */
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  /* Stile für die Buttons */
+  .button {
+      display: inline-block;         /* Rendert den Button als Block mit Inline-Verhalten */
+      width: 400px;                  /* Breite des Buttons: 400px */
+      height: 150px;                 /* Höhe des Buttons: 150px */
+      margin: 20px;                  /* Fügt einen Außenabstand von 10px hinzu */
+      font-size: 130px;              /* Schriftgröße innerhalb des Buttons */
+      text-align: center;            /* Zentriert den Text horizontal im Button */
+      line-height: 150px;            /* Vertikale Zentrierung durch eine passende Zeilenhöhe */
+      color: white;                  /* Schriftfarbe auf Weiß setzen */
+      background-color: #00796b;     /* Hintergrundfarbe auf ein dunkleres Grün setzen */
+      border-radius: 100px;            /* Rundet die Ecken des Buttons mit einem Radius von 5px ab */
+      text-decoration: none;         /* Entfernt den Unterstrich bei Links */
+      position: relative;            /* Setzt das Positionierungskonzept für Kinder-Elemente wie `img` */
+      overflow: hidden;              /* Verhindert, dass Inhalte außerhalb des Buttons angezeigt werden */
+      cursor: pointer;               /* Zeigt einen Zeiger-Cursor an, um Klickbarkeit anzuzeigen */
+      transition: background-color 0.3s ease; /* Sanfter Übergang bei Farbwechsel (Hover-Effekt) */
+      animation: pulsieren 1.5s infinite;
+  }
+
+  /* Hover-Effekt für die Buttons */
+  .button:hover {
+      background-color: #004d40;     /* Ändert die Hintergrundfarbe bei Hover auf ein dunkleres Grün */
+      color: transparent;            /* Versteckt den Text bei Hover */
+  }
+
+  /* Stile für die Bilder innerhalb der Buttons */ 
+.button img {
+     display: none;                 /* Standardmäßig wird das Bild nicht angezeigt */
+     position: absolute;            /* Absolut positioniert relativ zum Button */
+     top: 0;                        /* Positioniert das Bild oben im Button */
+     left: 0;                       /* Positioniert das Bild links im Button */
+     width: 100%;                   /* Bild nimmt die volle Breite des Buttons ein */
+     height: 100%;                  /* Bild nimmt die volle Höhe des Buttons ein */
+     object-fit: contain;           /* Bild wird skaliert, um den Button proportional zu füllen */
+     z-index: 1;                    /* Setzt die Ebene des Bildes, damit es sichtbar bleibt */ 
+  } 
+  
+/* Hover-Effekt für Bilder innerhalb der Buttons */
+.button:hover img {
+      display: block;                /* Zeigt das Bild an, wenn der Button gehovt wird */
+  }
+  </style>
+</head>
+<body>
+  <h1>Was ist deine Antwort?</h1>
+  <a class="button" href="video.html?response=ja">
+    <span>Ja!</span>
+    <img src="images/smiley-love-you.gif" alt="Positives GIF" />
+  </a>
+  <a class="button" href="video.html?response=hmm">
+    <span>Hmm..</span>
+    <img src="images/smiley-distraught-yellow.gif" alt="Verzweiflung GIF" />
+  </a>
+  <a class="button" href="video.html?response=nein">
+    <span>Nein!</span>
+    <img src="images/smiley 3d-crying-emoji-vic.gif" alt="Negatives GIF">
+  </a>
+</body>
+</html>

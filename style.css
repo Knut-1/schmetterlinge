@@ -1,0 +1,169 @@
+	/* Stil für den Hauptcontainer */
+body {
+    background-color: #0abad1; /* Azurblauer Hintergrund */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+}
+
+.proposal {
+    text-align: center;
+    margin-top: 200px; /* Abstand vom oberen Rand */
+}
+
+.proposal-text {
+    margin-top: 10px; /* Abstand vom Container nach unten */
+    font-size: 8.5em;  /* Schriftgröße auf das 2,5-fache der Standardgröße setzen */
+    margin-bottom: 50px; /* Abstand nach unten hinzufügen oder anpassen */
+}
+
+/* Überschrift-Stil */
+h1 {
+    font-size: 65px; /* Schriftgröße der Überschrift */
+    margin-top: 20px;
+    margin-bottom: 0; /* Kein Abstand unter der Überschrift */
+}
+
+/* Container für die Herzen und das Bild */
+.heart-container {
+    display: flex;
+    justify-content: space-evenly; /* Gleichmäßiger Abstand zwischen den Elementen */
+    align-items: center; /* Vertikale Zentrierung der Herzen */
+    max-width: 1500px; /* Mehr Platz für die Herzen */
+    margin: 50px auto; /* Zentrierung der Flexbox und Abstand nach oben/unten */
+    padding: 0 20px; /* Zusätzlicher horizontaler Abstand */
+}
+
+/* Stil für das Bild zwischen Überschrift und Herzen */
+.moment-image {
+    display: block; /* Bild wird als Blockelement angezeigt */
+    margin: -10px auto; /* Zentrierung innerhalb des Containers */
+    max-width: 37%; /* Begrenzung der Bildbreite */
+    height: auto; /* Beibehaltung des Seitenverhältnisses */
+    border-radius: 10px; /* Abgerundete Ecken für ein weicheres Design */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sanfter Schatten für das Bild */
+}
+
+/* Herz-Stile */
+.heart {
+    width: 200px; /* Breiteres Herz */
+    height: 200px; /* Höheres Herz */
+    background: #ff6b6b;
+    transform: rotate(-45deg);
+    animation: pulse 1.5s infinite;
+    position: relative;
+    margin: 0 20px; /* Abstand zwischen Herz und Bild */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    width: 200px; /* Entspricht der neuen Breite */
+    height: 200px; /* Entspricht der neuen Höhe */
+    background: #ff6b6b;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.heart::before {
+    top: -100px; /* Halbierte Höhe des Herzens */
+    left: 0;
+}
+
+.heart::after {
+    top: 0;
+    left: 100px; /* Halbierte Breite des Herzens */
+}
+
+/* Pulsierende Animation */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1) rotate(-45deg);
+    }
+    50% {
+        transform: scale(1.2) rotate(-45deg);
+    }
+}
+
+@keyframes pulsieren {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        transform: scale(1.05); /* Button leicht vergrößern */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Schatten verstärken */
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Stil für die Buttons */
+.button {
+    display: inline-block;
+    position: relative; /* Wichtig: Wir stellen sicher, dass der Button als Container für das Bild fungiert */
+    width: 250px; /* Doppelte Breite */
+    height: 100px; /* Doppelte Höhe */
+    margin: 10px;
+    font-size: 50px; /* Angepasste Schriftgröße für größere Buttons */
+    text-align: center;
+    line-height: 100px; /* Line-Height an neue Höhe angepasst */
+    color: white;
+    background-color: #00796b;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    overflow: hidden; /* Verhindert, dass das Bild außerhalb des Buttons sichtbar ist */
+    transition: background-color 0.3s ease, transform 0.2s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    animation: pulsieren 1.5s infinite;
+}
+/* Stil für den Button Weiter */
+.index {
+    display: inline-block;
+    position: relative; /* Basis für das positionierte Bild */
+    width: 550px; 
+    height: 100px; 
+    margin: -20px;
+    font-size: 50px;
+    text-align: center;
+    line-height: 100px;
+    color: white;
+    background-color: #00796b;
+    border-radius: 100px;
+    text-decoration: none;
+    overflow: hidden; /* Verhindert, dass das Bild über den Button hinausragt */
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    animation: pulsieren 1.5s infinite;
+}
+
+/* Hover-Effekt für Button */
+.index:hover {
+    background-color: #004d40; /* Dunkleres Grün */
+    color: transparent;        /* Text ausblenden */
+}
+
+/* Bild innerhalb des Buttons */
+.index img.hover-gif {
+    display: none; /* Standardmäßig unsichtbar */
+    position: absolute;
+    top: 50%;               /* Zentriert das Bild vertikal */
+    left: 50%;              /* Zentriert das Bild horizontal */
+    transform: translate(-50%, -50%);
+    width: auto;           /* Größe des Bildes */
+    height: auto;
+}
+
+/* Bild bei Hover anzeigen */
+.index:hover img.hover-gif {
+    display: block; /* Bild sichtbar machen */
+}
+

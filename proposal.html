@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Der Antrag</title>
+    <style>
+        /* Allgemeine Stile für das Layout der Seite */
+        body {
+            background-color: #0abad1; /* Azurblauer Hintergrund */ 
+	    color: white;    
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #0abad1;
+            margin: 130px;
+            padding: 0;
+        }
+
+        .proposal {
+            margin-top: 50px;
+        }
+
+        /* Stile für die Bildergalerie */
+        .images {
+            display: flex;
+            justify-content: center;
+            gap: 150px; /* Abstand zwischen den Bildern */
+            margin-bottom: 20px;
+        }
+
+        .images img {
+            width: 750px; /* Standardgröße der Bilder */
+            height: auto; /* Beibehaltung des Seitenverhältnisses */
+            transition: transform 0.3s ease; /* Animation beim Hover */
+        }
+
+        /* Hover-Effekt für die Bilder */
+        .images img:hover {
+            transform: scale(1.1); /* Vergrößert das Bild leicht */
+        }
+        
+        /* Überschrift-Stil */
+	h1 {
+    	    font-size: 125px; /* Schriftgröße der Überschrift */
+    	    margin-top: 30px;
+    	    margin-bottom: 50px; /* Abstand unter der Überschrift */
+	}
+
+	/* Animation pulsieren */
+	@keyframes pulsieren {
+    	    0% {
+            transform: scale(1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    	}
+    	    50% {
+            transform: scale(1.05); /* Button leicht vergrößern */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Schatten verstärken */
+   	 }
+    	    100% {
+            transform: scale(1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    	}
+	}
+        
+        /* Stile für den Button */
+        .button {
+            display: inline-block;
+            background-color: #ff6f61; /* Farbe des Buttons */
+            color: white; /* Textfarbe des Buttons */
+            background-color: #00796b; /* Setzt die Hintergrundfarbe des Buttons */
+            padding: 50px 150px; /* Innenabstand des Buttons */
+            text-decoration: none; /* Entfernt die Unterstreichung */
+            font-size: 4.0em; /* Schriftgröße */
+            border-radius: 100px; /* Abgerundete Ecken */
+            transition: background-color 0.3s ease; /* Animation bei Farbwechsel */
+            animation: pulsieren 1.5s infinite;
+        }
+
+        /* Hover-Effekt für den Button */
+        .button:hover {
+            background-image: url('images/click me.gif'); 	/* Fügt ein Hintergrundbild beim Hover hinzu */
+   	    background-size: 100% 120%;  			/* Dehnt das Hintergrundbild, um den Button zu bedecken */
+   	    background-position: center;  			/* Zentriert das Bild im Button */
+   	    color: transparent; 				/* Textfarbe auf transparent setzen */
+        }
+
+        /* Anpassung der Button-Größe */
+        .button {
+            width: auto; /* Standardweite, passt sich dem Inhalt an */
+            max-width: 300px; /* Maximale Breite für größere Buttons */
+        }
+    </style>
+</head>
+<body>
+    <div class="proposal">
+        <div class="images">
+            <img src="images/Teufelchen-removebg-preview.png" alt="Bild 3">
+            <img src="https://images.emojiterra.com/google/noto-emoji/unicode-16.0/color/512px/2764.png" alt="Bild 2">
+            <img src="images/Engelchen-removebg-preview.png" alt="Bild 1">
+        </div>
+        <h1 class="proposal-text">Anna, willst du mich heiraten?</h1>
+        <a href="answer.html" class="button">Antworten</a>
+    </div>
+</body>
+</html>
+

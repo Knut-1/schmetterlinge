@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="de"> <!-- Definiert die Sprache der Seite als Deutsch -->
+<head>
+    <meta charset="UTF-8"> <!-- Zeichenkodierung der Seite -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsives Verhalten der Seite -->
+    <title>Wer ist Anna ...?</title> <!-- Titel der Seite im Browser -->
+    <style>
+        /* Definiert die Schriftart für die gesamte Seite */
+        body {            
+            font-family: Arial, sans-serif; /* Schriftart */
+            margin: 0; 			/* Kein Außenabstand */
+            padding: 0; 		/* Kein Innenabstand */
+            background-color: #0abad1; 	/* Azurblauer Hintergrund */
+        }
+
+        /* Styling für Hauptüberschrift */
+        h1 {
+            font-size: 150px; 		/* Schriftgröße der Überschrift */
+    	    margin-top: 10px;		/* Abstand über der Überschrift */
+    	    margin-bottom: 10px; 	/* Abstand unter der Überschrift */
+            text-align: center; 	/* Zentriert die Überschriften */
+            color: white; 		/* Setzt die Textfarbe */
+        }
+        
+        /* Styling für Container-Überschrift */
+        h2 {
+            font-size: 55px; 		/* Schriftgröße der Überschrift */
+    	    margin-top: 30px;		/* Abstand über der Überschrift */
+    	    margin-bottom: 50px; 	/* Abstand unter der Überschrift */
+            text-align: center; 	/* Zentriert die Überschriften */
+            color: aqua; 		/* Schriftfarbe */
+        }
+
+        /* Container für die Hauptinhalte */
+        .container {
+            max-width: 800px; 		/* Maximale Breite */
+            margin: 20px auto; 		/* Zentriert den Container */
+            padding: 20px; 		/* Innenabstand */
+            background: #fff; 		/* Weißer Hintergrund */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Schatteneffekt */
+            border-radius: 25px; 	/* Abgerundete Ecken */
+        }
+
+        /* Flexbox-Container für Bilder */
+        .image-container {
+            display: flex; 		/* Flexbox-Ausrichtung */
+            align-items: center; 	/* Zentriert vertikal */
+            justify-content: center; 	/* Zentriert horizontal */
+            margin: 20px 0; 		/* Abstand oben und unten */
+        }
+
+        /* Bild-Styling */
+        .image-container img {
+            max-width: 500px; 		/* Maximale Breite */
+            height: auto; 		/* Automatische Höhe */
+            border-radius: 8px; 	/* Abgerundete Ecken */
+            margin: 0 20px; 		/* Abstand zu den Pfeilen */
+        }
+
+        /* Styling für Pfeile */
+        .arrow {
+            font-size: 2rem; 		/* Schriftgröße */
+            cursor: pointer; 		/* Mauszeiger als Hand */
+            user-select: none; 		/* Kein Text auswählbar */
+            color: aqua; 		/* azurblaue Farbe */
+        }
+
+        .arrow:hover {
+            color: aqua; 		/* azurblaue Farbe */
+        }
+
+        /* Klasse zum Verstecken von Elementen */
+        .hidden {
+            display: none; 		/* Versteckt das Element */
+        }
+
+        /* Styling für Buttonsgruppe Zurück und Vorwärts */
+        .button-group {
+            display: flex; 		/* Buttons nebeneinander */
+            justify-content: space-between; /* Maximale Abstände zwischen Buttons */
+            margin-top: 20px; 		/* Abstand nach oben */
+        }
+
+        /* Button-Styling */
+        .button {
+            padding: 10px 20px; 	/* Innenabstand */
+            background-color: aqua; 	/* Blaue Hintergrundfarbe */
+            color: #fff; 		/* Weiße Schriftfarbe */
+            text-decoration: none; 	/* Keine Unterstreichung */
+            border-radius: 25px; 	/* Abgerundete Ecken */
+            border: none; 		/* Entfernt den Rahmen des Buttons */
+        }
+
+        /* Animation pulsieren */
+        @keyframes pulsieren {
+            0% {
+                transform: scale(1); 				/* Ausgangsgröße */
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 	/* Ausgangsschatten */
+            }
+            50% {
+                transform: scale(1.05); 			/* Leicht vergrößert */
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 	/* Verstärkter Schatten */
+            }
+            100% {
+                transform: scale(1); 				/* Zurück zur Ausgangsgröße */
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 	/* Zurück zum Ausgangsschatten */
+            }
+        }
+
+        /* Stile für den Weiter-Button */
+        .select {
+            display: inline-block; 	/* Kein Block-Element, sodass Breite des Inhalts verwendet wird */
+            margin: 10px; 		/* Zentriert den Button horizontal */
+            color: white; 		/* Textfarbe */
+            background-color: #00796b; 	/* Hintergrundfarbe */
+            padding: 0px 70px; 		/* Innenabstand */
+            text-decoration: none; 	/* Entfernt Unterstreichung */
+            font-size: 5.5em; 		/* Schriftgröße */
+            border-radius: 100px; 	/* Abgerundete Ecken */
+            animation: pulsieren 1.5s infinite; /* Pulsierende Animation */
+            text-align: center; 	/* Zentriert den Text im Button */
+        }
+
+        .select:hover {
+            background-color: #0056b3; 	/* Dunkleres Blau bei Hover */
+            background-image: url('images/click me.gif'); /* Fügt ein Hintergrundbild hinzu */
+            background-size: 100% 120%; /* Passt das Bild an die Größe des Buttons an */
+            background-position: center; /* Zentriert das Bild */
+            color: transparent; 	/* Textfarbe auf transparent setzen */
+        }
+
+        /* Container für den Weiter-Button, um ihn zu zentrieren */
+        .button-container {
+            display: flex; 		/* Flexbox für Zentrierung */
+            justify-content: center; 	/* Zentriert den Inhalt horizontal */
+            align-items: center; 	/* Zentriert den Inhalt vertikal */
+        }
+    </style>
+</head>
+<body>
+    <h1>Wer ist Anna ...?</h1> <!-- Hauptüberschrift -->
+
+    <!-- Haupt-Container -->
+    <div class="container">        
+        <!-- Episode 1 -->
+        <div id="episode1" class="episode">
+            <h2>Deine Kindheit</h2> <!-- Episodentitel -->
+            <div class="image-container">
+                <div class="arrow" onclick="prevImage('kindheit')">&#9664;</div> <!-- Pfeil zurück -->
+                <img id="image_kindheit" src="kindheit/kind_1.jpg" alt="Kindheit"> <!-- Bild -->
+                <div class="arrow" onclick="nextImage('kindheit')">&#9654;</div> <!-- Pfeil vorwärts -->
+            </div>
+            <a href="#" class="button" onclick="showEpisode('episode2')">Vorwärts</a> <!-- Button vorwärts -->
+        </div>
+
+        <!-- Episode 2 -->
+        <div id="episode2" class="episode hidden">
+            <h2>Deine Jugend</h2> <!-- Episodentitel -->
+            <div class="image-container">
+                <div class="arrow" onclick="prevImage('jugend')">&#9664;</div> <!-- Pfeil zurück -->
+                <img id="image_jugend" src="jugend/Anna_1.jpg" alt="Jugend"> <!-- Bild -->
+                <div class="arrow" onclick="nextImage('jugend')">&#9654;</div> <!-- Pfeil vorwärts -->
+            </div>
+            <div class="button-group">
+                <a href="#" class="button" onclick="showEpisode('episode1')">Zurück</a> <!-- Button zurück -->
+                <a href="#" class="button" onclick="showEpisode('episode3')">Vorwärts</a> <!-- Button vorwärts -->
+            </div>
+        </div>
+
+        <!-- Episode 3 -->
+        <div id="episode3" class="episode hidden">
+            <h2>Und dann kam er</h2> <!-- Episodentitel -->
+            <div class="image-container">
+                <div class="arrow" onclick="prevImage('undDannKamEr')">&#9664;</div> <!-- Pfeil zurück -->
+                <img id="image_undDannKamEr" src="und dann kam er/Viktor_1.jpg" alt="Und dann kam er"> <!-- Bild -->
+                <div class="arrow" onclick="nextImage('undDannKamEr')">&#9654;</div> <!-- Pfeil vorwärts -->
+            </div>
+            <a href="#" class="button" onclick="showEpisode('episode2')">Zurück</a> <!-- Button zurück -->
+        </div>
+    </div>
+
+    <!-- Zentrierter Weiter-Button unter dem Container -->
+    <div class="button-container">
+        <a href="quiz.html" class="select">Weiter</a> <!-- Weiter-Button -->
+    </div>
+
+    <script>
+        // JavaScript für Bilder und Episodensteuerung
+        const imageSets = {
+            kindheit: ['kindheit/kind_1.jpg', 'kindheit/kind_2.jpg', 'kindheit/kind_3.jpg', 'kindheit/kind_5.jpg', 'kindheit/kind_6.jpg', 'kindheit/kind_7.jpg', 'kindheit/kind_8.jpg', 
+            	       'kindheit/kind_9.jpg', 'kindheit/kind_11.jpg', 'kindheit/kind_13.jpg', 'kindheit/kind_14.jpg', 'kindheit/kind_16.jpg', 'kindheit/kind_15.jpg', 'kindheit/kind_19.jpg', 
+            	       'kindheit/kind_20.jpg', 'kindheit/kind_21.jpg', 'kindheit/kind_22.jpg'],
+            jugend: ['jugend/Anna_1.jpg', 'jugend/Anna_2.jpg', 'jugend/Anna_3.jpg', 'jugend/Anna_4.jpg', 'jugend/Anna_5.jpg', 'jugend/Anna_6.jpg', 'jugend/Anna_7.jpg', 'jugend/Anna_8.jpg', 
+            	    'jugend/Anna_9.jpg', 'jugend/Anna_10.jpg', 'jugend/Anna_11.jpg', 'jugend/Anna_12.jpg', 'jugend/Anna_13.jpg', 'jugend/Anna_14.jpg', 'jugend/Anna_15.jpg', 'jugend/Anna_16.jpg', 
+            	    'jugend/Anna_17.jpg', 'jugend/Anna_18.jpg', 'jugend/Anna_19.jpg', 'jugend/Anna_20.jpg', 'jugend/Anna_22.jpg', 'jugend/Anna_21.jpg'],
+            undDannKamEr: ['und dann kam er/Viktor_1.jpg', 'und dann kam er/Viktor_2.jpg', 'und dann kam er/Viktor_3.jpg', 'und dann kam er/Viktor_4.jpg', 'und dann kam er/Viktor_5.jpg', 
+                          'und dann kam er/Viktor_6.jpg', 'und dann kam er/Viktor_7.jpg', 'und dann kam er/Viktor_8.jpg', 'und dann kam er/Viktor_9.jpg', 'und dann kam er/Viktor_10.jpg', 
+                          'und dann kam er/Viktor_11.jpg', 'und dann kam er/Viktor_12.jpg', 'und dann kam er/Viktor_13.jpg', 'und dann kam er/Viktor_14.jpg', 'und dann kam er/Viktor_15.jpg', 
+                          'und dann kam er/Viktor_16.jpg', 'und dann kam er/Viktor_17.jpg', 'und dann kam er/Viktor_18.jpg']
+        };
+
+        let currentIndexes = {
+            kindheit: 0,
+            jugend: 0,
+            undDannKamEr: 0
+        };
+
+        // Bild zurück wechseln
+        function prevImage(category) {
+            currentIndexes[category] = (currentIndexes[category] - 1 + imageSets[category].length) % imageSets[category].length;
+            updateImage(category);
+        }
+
+        // Bild vorwärts wechseln
+        function nextImage(category) {
+            currentIndexes[category] = (currentIndexes[category] + 1) % imageSets[category].length;
+            updateImage(category);
+        }
+
+        // Bild aktualisieren
+        function updateImage(category) {
+            const imgId = `image_${category}`; // Bild-ID erstellen
+            document.getElementById(imgId).src = imageSets[category][currentIndexes[category]];
+        }
+
+        // Zwischen Episoden wechseln
+        function showEpisode(episodeId) {
+            document.querySelectorAll('.episode').forEach(function(episode) {
+                episode.classList.add('hidden'); // Alle Episoden verstecken
+            });
+            document.getElementById(episodeId).classList.remove('hidden'); // Gewählte Episode anzeigen
+        }
+    </script>
+</body>
+</html>
+

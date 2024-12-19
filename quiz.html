@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="de"> <!-- Legt den Dokumenttyp und die Sprache des Inhalts fest -->
+<head>
+    <meta charset="UTF-8"> <!-- Stellt die Zeichenkodierung auf UTF-8 ein -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Optimiert die Anzeige auf mobilen Geräten -->
+    <title>Ein kleines Quiz</title> <!-- Der Titel der Seite -->
+    <link rel="stylesheet" href="style.css"> <!-- Verlinkt die externe CSS-Datei -->
+    <script src="quiz.js" defer></script> <!-- Verlinkt die externe JavaScript-Datei und lädt sie verzögert -->
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Setzt die Schriftart auf Arial oder eine ähnliche Schrift */
+            background: #0abad1; 	/* Azurblauer Hintergrund */
+            display: flex; 		/* Aktiviert ein flexibles Layout */
+            flex-direction: column; 	/* Ordnet Elemente vertikal an */
+            align-items: center; 	/* Zentriert Elemente horizontal */
+            justify-content: center; 	/* Zentriert Elemente vertikal */
+            height: 100vh; 		/* Setzt die Höhe auf 100% der Bildschirmhöhe */
+            margin: 0; 			/* Entfernt die Standard-Außenabstände des Browsers */
+            color: #333; 		/* Setzt die Textfarbe */            
+        }
+        .quiz {
+            text-align: center; 	/* Zentriert den Text im Container */
+            background: white; 		/* Weißer Hintergrund */
+            padding: 40px; 		/* Innenabstand von 20px */
+            border-radius: 10px; 	/* Abgerundete Ecken mit einem Radius von 10px */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Weicher Schatten unter dem Container */
+            width: 80%; 		/* Breite des Containers */
+            max-width: 800px; 		/* Maximale Breite des Containers: 800px */
+        }
+        .quiz h1 {
+            margin-bottom: 20px; 	/* Abstand unterhalb der Überschrift */
+            margin-top: 10px; 	 	/* Abstand vom Container nach unten */
+            font-size: 6.1em; 	 	/* Schriftgröße */
+            color: aqua;	 	/* Hellblaue Schriftfarbe */ 	
+        }
+        .quiz h2 {
+            margin-bottom: 20px; 	/* Abstand unterhalb der Überschrift */
+            margin-top: 10px; 	 	/* Abstand vom Container nach unten */
+            font-size: 2.0em; 	 	/* Schriftgröße */
+        }
+        .quiz h3 {
+            margin-bottom: 20px; 	/* Abstand unterhalb der Überschrift */
+            margin-top: 10px; 		/* Abstand vom Container nach unten */
+            font-size: 3.0em; 	 	/* Schriftgröße */
+        }
+        .question {
+            margin-bottom: 40px; 	/* Anpassbarer Abstand unter der Frage */
+        }
+        .answers {			/* Bilder als Antworten */
+            display: grid; 		/* Nutzt ein Grid-Layout */
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Erzeugt ein Raster mit flexibler Breite */
+            gap: 15px; 			/* Abstand zwischen den Buttons */
+            width: 100%; 		/* Stellt sicher, dass der Container die volle Breite einnimmt */
+            justify-items: center; 	/* Zentriert die Buttons innerhalb des Containers */
+        }
+        .answers button {		/* farbige Kreise */
+            width: 100px; 		/* Breite der Buttons */
+            height: 100px; 		/* Höhe der Buttons */
+            border: none; 		/* Entfernt den Standardrahmen */
+            border-radius: 50px;	/* Rundet die Ecken der Buttons ab */
+            font-size: 1em;		/* Schriftgröße */
+            cursor: pointer; 		/* Ändert den Mauszeiger auf "Hand" bei Hover */
+            transition: transform 0.2s, background-color 0.3s; /* Animiert Transformationen und Farbänderungen */
+        }
+        .answers button:hover {
+            transform: scale(1.1); 	/* Vergrößert die Buttons leicht bei Hover */
+        }
+        #final-heart {
+            display: none; 		/* Versteckt den Button standardmäßig */
+        }
+        .button {			/* Ich habe die wichtigste Frage an dich */
+    	    width: 881px; 		/* Setzt die Breite des Bildes */
+    	    height: 100px; 		/* Setzt die Höhe des Bildes */
+    	    font-size: 2.8em; 		/* Setzt die Schriftgröße des Buttons */
+    	    margin-top: 20px; 		/* Fügt einen oberen Abstand zum Bild hinzu */
+    	    border-radius: 50px; 	/* Fügt abgerundete Ecken hinzu */
+	}
+        /* Hover-Effekt für die Buttons */
+  	.button:hover {
+     	    background-image: url('images/click me.gif'); 	/* Fügt ein Hintergrundbild beim Hover hinzu */
+   	    background-size: 100% 120%;  			/* Dehnt das Hintergrundbild, um den Button zu bedecken */
+   	    background-position: center;  			/* Zentriert das Bild im Button */
+   	    color: transparent; 				/* Textfarbe auf transparent setzen */
+  	}
+        /* Spezielle Stile für das Bild als Antwort */
+        .image-button {
+            padding: 0; 		/* Entfernt Innenabstand */
+            background: none; 		/* Entfernt den Standardhintergrund */
+        }
+        .image-button img {
+            width: 100%; 		/* Bild nimmt die volle Breite des Buttons ein */
+            height: 100%; 		/* Bild nimmt die volle Höhe des Buttons ein */
+            object-fit: cover; 		/* Bild füllt den Button vollständig aus */
+            border-radius: 10px; 	/* Abgerundete Ecken */
+        }
+        .intro {			/* Wie gut kennst du Viktor */
+   	    text-align: center; 	/* Zentriert den Text im Intro-Bereich */
+	}
+
+	.intro img {			/* Thinking Smiley */
+    	    width: 70px; 		/* Setzt die Breite des Bildes */
+    	    height: 50px; 		/* Setzt die Höhe des Bildes */
+    	    margin-top: 20px; 		/* Fügt einen oberen Abstand zum Bild hinzu */
+	}
+	.start-btn {			/* Los Gehts! */
+    	    margin-top: 20px; 		/* Fügt einen Abstand oberhalb des Buttons hinzu */
+    	    padding: 10px 20px; 	/* Innenabstand des Buttons */
+    	    font-size: 3.5em; 		/* Setzt die Schriftgröße des Buttons */
+      	    background-color: #00796b; /* Setzt die Hintergrundfarbe des Buttons */
+   	    color: white; 		/* Setzt die Textfarbe des Buttons */
+    	    border: none; 		/* Entfernt den Rahmen des Buttons */
+    	    border-radius: 50px; 	/* Abgerundete Ecken für den Button */
+    	    cursor: pointer; 		/* Zeigt den Hand-Cursor beim Hover über den Button */
+	}
+	.start-btn:hover {
+   	    background-image: url('images/click me.gif'); 	/* Fügt ein Hintergrundbild beim Hover hinzu */
+   	    background-size: 100% 120%;  			/* Dehnt das Hintergrundbild, um den Button zu bedecken */
+   	    background-position: center;  			/* Zentriert das Bild im Button */
+   	    color: transparent; 				/* Textfarbe auf transparent setzen */
+	}
+	.feedback {
+    	    text-align: center;		/* Zentriert den Text im Intro-Bereich */
+    	    margin-top: 20px;		/* Fügt einen Abstand oberhalb des Buttons hinzu */
+	}
+    </style>
+</head>
+<body>
+<div class="quiz"> 						<!-- Quiz Container -->
+    <h1>Ein kleines Quiz</h1> 					<!-- Überschrift des Quiz -->
+    <div id="intro" class="intro">        
+        <h3>Wie gut kennst du Viktor 
+        <img src="images/smiley_thinking.gif" alt="Smiley Thinking"></h3>       
+        <button class="start-btn" id="start-btn">Los geht's!</button>
+    </div>
+    <div id="quiz-container"></div> 				<!-- Container, in dem die Fragen und Antworten angezeigt werden -->
+</div>
+
+<a id="final-heart" href="proposal.html" class="button" style="display: none;">💖 Ich habe die wichtigste Frage an dich 💖 <!-- Herz-Button, der später angezeigt wird -->
+    <img src="images/click me.gif" alt="Positives GIF" />
+</a>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const questions = [ 					/* Array mit Quizfragen */
+            {
+                question: "Was ist seine Lieblingsfarbe?", 	/* Erste Frage */
+                answers: ["", "", "", ""], 			/* Antwortoptionen */
+                colors: ["red", "blue", "green", "yellow"], 	/* Farben für die Buttons */
+                correctIndex: 1  				/* Die richtige Antwort ist "Blau" (Index 1) */
+            },
+            {
+                question: "Welche Tierart mag er am meisten?", 	/* Zweite Frage */
+                answers: ["Hund", "Katze", "Vogel", "Fisch"],	/* Antwortoptionen */
+                images: ["images/dog_hotdog.gif", "images/cat_maxwell.gif", "images/bird_bird-birds.gif", "images/fish_delfin.gif"], /* Bilder passend zu Antworten */
+                correctIndex: 0  				/* Die richtige Antwort ist "Hund" (Index 0) */
+            },
+            {
+                question: "Wohin möchte er mit dir verreisen?", 	/* Dritte Frage */
+                answers: ["Paris", "New York", "Tokio", "Venedig"],	/* Antwortoptionen */
+                images: ["images/Paris_2.png", "images/New_York_2.png", "images/Tokio_2.png", "images/Venedig_2.png"], /* Bilder passend zu Antworten */
+                correctIndex: 3  					/* Die richtige Antwort ist "Venedig" (Index 3) */
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container'); 	/* Referenz auf den Fragen-Container */
+        const finalHeart = document.getElementById('final-heart'); 		/* Referenz auf den Herz-Button */
+        const intro = document.getElementById('intro'); 			/* Referenz auf den Intro-Container */
+        const startBtn = document.getElementById('start-btn'); 			/* Referenz auf den Start-Button */
+        let currentQuestionIndex = 0; 						/* Startet bei der ersten Frage */
+        const feedbackContainer = document.createElement('div'); 		/* Fügt einen Container für Feedback hinzu */
+	feedbackContainer.classList.add('feedback'); 				/* Klasse für Styling */
+	quizContainer.appendChild(feedbackContainer); 				/* Fügt es dem Quiz-Container hinzu */
+	
+        function showQuestion(index) {
+            quizContainer.innerHTML = ''; 					/* Löscht vorherigen Inhalt */
+            const question = questions[index]; 					/* Holt die aktuelle Frage */
+
+            const questionElement = document.createElement('div'); 		/* Erstellt ein div für die Frage */
+            questionElement.classList.add('question'); 				/* Fügt die Klasse 'question' hinzu */
+            questionElement.innerHTML = `<h2>${question.question}</h2>`; 	/* Fügt die Frage ein */
+            quizContainer.appendChild(questionElement); 			/* Fügt die Frage in den Container ein */
+
+            const answersElement = document.createElement('div'); 		/* Erstellt ein div für die Antworten */
+            answersElement.classList.add('answers'); 				/* Fügt die Klasse 'answers' hinzu */
+            question.answers.forEach((answer, i) => { 				/* Geht jede Antwortoption durch */
+                const button = document.createElement('button'); 		/* Erstellt einen Button */
+
+                // Farben der Buttons nur für die erste Frage
+                if (index === 0) {
+                    button.style.backgroundColor = question.colors[i]; 		/* Setzt die Farbe entsprechend */
+                }
+
+                // Bild als Button für die Antwort 
+                if (index === 1 && question.images[i]) {
+                    button.classList.add('image-button'); 			/* Fügt spezielle Klasse hinzu */
+                    const img = document.createElement('img'); 			/* Erstellt ein Bild */
+                    img.src = question.images[i]; 				/* Setzt die Bildquelle */
+                    img.alt = answer; 						/* Setzt den Alternativtext */
+                    button.appendChild(img); 					/* Fügt das Bild dem Button hinzu */
+                } else {
+                    button.textContent = answer; 				/* Setzt den Button-Text */
+                }
+                
+                // Bild als Button für die Antwort 
+                if (index === 2 && question.images[i]) {
+                    button.classList.add('image-button'); 			/* Fügt spezielle Klasse hinzu */
+                    const img = document.createElement('img'); 			/* Erstellt ein Bild */
+                    img.src = question.images[i]; 				/* Setzt die Bildquelle */
+                    img.alt = answer; 						/* Setzt den Alternativtext */
+                    button.appendChild(img); 					/* Fügt das Bild dem Button hinzu */
+                }					
+
+                button.addEventListener('click', () => handleAnswer(i)); 	/* Eventlistener für Klick */
+                answersElement.appendChild(button); 				/* Fügt den Button in den Antworten-Container ein */
+            });
+            quizContainer.appendChild(answersElement); 				/* Fügt den Antworten-Container in den Fragen-Container ein */
+        }
+
+        function handleAnswer(selectedIndex) {
+            const currentQuestion = questions[currentQuestionIndex];  		/* Holen der aktuellen Frage */
+    	    const correctIndex = currentQuestion.correctIndex;  		/* Die richtige Antwort für die aktuelle Frage */
+            const isCorrect = selectedIndex === correctIndex;			/* Überprüft, ob die ausgewählte Antwort korrekt ist */
+            feedbackContainer.innerHTML = ''; 				 	/* Leert den Feedback-Bereich */
+
+            if (isCorrect) {
+                const thumbsUp = document.createElement('img');			/* Erstellt das "Daumen hoch"-Bild */
+                thumbsUp.src = 'images/thumbs up.gif';				/* Bildquelle für Daumen hoch */
+                thumbsUp.alt = 'Daumen hoch';					/* Alt-Text für das Bild */
+                feedbackContainer.appendChild(thumbsUp);			/* Fügt das Bild dem Feedback-Container hinzu */
+                quizContainer.appendChild(feedbackContainer);			/* Zeigt das Feedback im Quiz-Container an */
+                setTimeout(() => {						/* Wartet 2 Sekunden, bevor es zur nächsten Frage geht */
+                    feedbackContainer.remove();					/* Entfernt das Feedback */
+                    nextQuestion();						/* Geht zur nächsten Frage */
+                }, 2000);							/* Zeiteinheit für setTimeout: 2000 Millisekunden => 2 sek. */
+            } else {
+                const thumbsDown = document.createElement("img");		/* Erstellt das "Daumen runter"-Bild */
+                thumbsDown.src = "images/thumbs down.gif";			/* Bildquelle für Daumen runter */
+                thumbsDown.alt = 'Daumen runter';				/* Alt-Text für das Bild */
+                feedbackContainer.appendChild(thumbsDown);			/* Fügt das Bild dem Feedback-Container hinzu */
+                quizContainer.appendChild(feedbackContainer);			/* Erstellt das "Daumen runter"-Bild */
+                setTimeout(() => {						/* Zeigt das Feedback im Quiz-Container an */
+                    feedbackContainer.remove();
+                    nextQuestion();
+                }, 2000);							/* Zeiteinheit in Millisekunden => 2 sek. */
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;						/* Erhöht den Index der aktuellen Frage */
+            if (currentQuestionIndex < questions.length) {			/* Wenn noch Fragen übrig sind */
+                showQuestion(currentQuestionIndex);				/* Zeigt die nächste Frage an */
+            } else {
+                endQuiz();							/* Beendet das Quiz, wenn alle Fragen beantwortet wurden */
+            }
+        }
+
+        function endQuiz() {
+            quizContainer.innerHTML = '<h2><p>Vielen Dank, dass du das Quiz gemacht hast!</p></h2>';	/* Zeigt Danke-Nachricht */
+            finalHeart.style.display = 'inline-block';							/* Macht den Herz-Button sichtbar */
+        }
+
+        startBtn.addEventListener('click', () => {			/* Zeigt das Intro und wartet auf Klick auf "Los geht's!" */
+            intro.style.display = 'none';				/* Versteckt das Intro */
+            showQuestion(currentQuestionIndex);				/* Zeigt die erste Frage an */
+        });
+    });
+</script>
+</body>
+</html>
+

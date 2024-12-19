@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interaktive Antwort</title>
+  <style>
+    /* Allgemeine Stile für das gesamte Dokument */
+    body {
+      font-family: Arial, sans-serif; /* Schriftart für den gesamten Text */
+      text-align: center;            /* Zentriert den Text horizontal */
+      background-color: #00bcd4;     /* Setzt die Hintergrundfarbe auf ein helles Blau */
+      color: white;                  /* Setzt die Textfarbe auf Weiß */
+      margin: 0;                     /* Entfernt den Standard-Außenabstand des Body-Elements */
+      padding: 50px;                 /* Fügt innen um das Body-Element 50px Platz hinzu */
+    }
+
+    /* Stile für die Hauptüberschrift (h1) */
+    h1 {
+      font-size: 5em;              /* Schriftgröße auf das 2,5-fache der Standardgröße setzen */
+      margin-top: 50px;             /* Abstand vom oberen Rand */
+    }
+
+    /* Stile für das Video */
+    #video-container {
+      margin-top: 50px;              /* Abstand zwischen Überschrift und Video */
+    }
+  </style>
+</head>
+<body>
+  <!-- Hauptüberschrift -->
+  <h1>Meine Reaktion ist:</h1>
+  <!-- Container, in den das Video dynamisch geladen wird -->
+  <div id="video-container"></div>
+  
+  <script>
+    // Hole den Parameter aus der URL (z.B. "?response=ja")
+    const urlParams = new URLSearchParams(window.location.search);
+    const response = urlParams.get('response'); // Antwort aus der URL holen (z.B. "ja", "hmm", "nein")
+    
+    // Wähle das passende Video basierend auf der Antwort
+    const videoContainer = document.getElementById('video-container'); // Container für das Video
+    const videoElement = document.createElement('video'); // Video-Element erstellen
+    videoElement.controls = true; // Steuerung hinzufügen
+    videoElement.autoplay = true; // Autoplay aktivieren
+    videoElement.style.width = '60%'; // Breite des Videos auf 80% setzen
+
+    // Zuordnung der Antwort zu den Videos
+    if (response === 'ja') {
+        videoElement.src = 'videos/ja.mp4'; // Video für die Antwort "Ja"
+    } else if (response === 'hmm') {
+        videoElement.src = 'videos/hmm.mp4'; // Video für die Antwort "Hmm"
+    } else if (response === 'nein') {
+        videoElement.src = 'videos/nein.mp4'; // Video für die Antwort "Nein"
+    } else {
+        document.body.innerHTML = '<h1>Ungültige Antwort</h1>'; // Fehlernachricht für ungültige Antwort
+        throw new Error('Ungültige Antwort'); // Wirf einen Fehler, wenn keine gültige Antwort vorliegt
+    }
+
+    // Füge das Video-Element in den Container ein
+    videoContainer.appendChild(videoElement);
+
+    // Prüfe, ob Autoplay mit Ton möglich ist
+    videoElement.play().then(() => {
+        // Wenn das Video erfolgreich abgespielt wird
+        console.log("Video wird abgespielt mit Ton."); // Log in der Konsole
+        videoElement.muted = false; // Deaktiviere Stummschaltung
+    }).catch(error => {
+        // Falls Autoplay mit Ton blockiert wird
+        console.warn("Autoplay mit Ton blockiert. Benutzeraktion erforderlich:", error); // Warnung in der Konsole
+        videoElement.muted = false; // Ton aktivieren für manuelles Abspielen
+        alert("Autoplay mit Ton wurde blockiert. Bitte klicken Sie auf das Video, um es mit Ton abzuspielen."); // Hinweis an den Benutzer
+        
+        // Füge einen Event-Listener hinzu, um manuelles Abspielen zu erlauben
+        videoElement.addEventListener('click', () => {
+            videoElement.play(); // Manuelles Abspielen mit Ton starten
+        }, { once: true }); // Der Event-Listener wird nach einem Klick entfernt
+    });
+  </script>
+</body>
+</html>
+
